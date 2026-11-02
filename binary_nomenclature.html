@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Binary Nomenclature — Study Tool</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f1f3ee;--card:#fff;--ink:#15202b;--mute:#6b7782;--line:#dde2db;--b:#2f5fb3;--r:#c8372d;--y:#d99a1e;--ok:#2e8b57}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1519;--card:#182026;--ink:#eef2f4;--mute:#93a0a8;--line:#27323a;--b:#6fa0ff;--r:#ff6b60;--y:#f0b84a;--ok:#4cc38a}}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{font-size:clamp(15px,min(calc(9px + .5vw),calc(6px + 1.4vh)),32px)}
+body{background:var(--bg);color:var(--ink);font:1.1rem 'Manrope',system-ui,sans-serif;min-height:100dvh;
+background-image:radial-gradient(50vw 40vw at 100% 0,color-mix(in srgb,var(--b) 14%,transparent),transparent),radial-gradient(45vw 40vw at 0 100%,color-mix(in srgb,var(--r) 12%,transparent),transparent);background-attachment:fixed}
+main{max-width:52rem;margin:0 auto;padding:clamp(1.4rem,5vh,4rem) max(1.2rem,env(safe-area-inset-right)) calc(3rem + env(safe-area-inset-bottom)) max(1.2rem,env(safe-area-inset-left))}
+.tag{font:700 .75rem 'JetBrains Mono',monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--b)}
+h1{font-size:clamp(2.6rem,8vw,4.6rem);line-height:.95;font-weight:800;letter-spacing:-.04em;margin:.6rem 0 1.6rem}
+h1 span{color:var(--r)}
+button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation}
+.seg{display:inline-flex;background:var(--line);border-radius:.9rem;padding:.25rem;gap:.15rem;margin-bottom:1.4rem;max-width:100%;flex-wrap:wrap}
+.seg button{border:0;background:transparent;padding:.55rem 1.05rem;border-radius:.7rem;font-weight:600;font-size:.95rem;transition:.2s}
+.seg button.on{background:var(--card);box-shadow:0 2px 8px rgba(0,0,0,.15);font-weight:800}
+.pane{display:none}.pane.on{display:block;animation:in .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(14px)}}
+.crumbs{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem;min-height:2.2rem}
+.cr{border:2px solid var(--line);background:var(--card);border-radius:99px;padding:.3rem .85rem;font-size:.85rem;font-weight:600}
+.cr:hover{border-color:var(--ink)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:1.6rem;padding:clamp(1.3rem,4vw,2.4rem);box-shadow:0 1.2rem 3rem -1.4rem rgba(0,0,0,.35);animation:in .45s cubic-bezier(.2,.8,.2,1)}
+.card h2{font-size:clamp(1.5rem,4vw,2.1rem);line-height:1.15;letter-spacing:-.02em;margin-bottom:1.4rem}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.o{border:2px solid;border-radius:1.1rem;padding:1.3rem 1rem;font-weight:800;font-size:1.15rem;background:transparent;transition:.2s cubic-bezier(.2,.8,.2,1)}
+.o:hover{transform:translateY(-3px);color:#fff}.o.b{border-color:var(--b)}.o.b:hover{background:var(--b)}.o.r{border-color:var(--r)}.o.r:hover{background:var(--r)}.o.y{border-color:var(--y)}.o.y:hover{background:var(--y)}
+.leaf small,.pq small{font:700 .72rem 'JetBrains Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.rule{font-size:1.25rem;line-height:1.5;margin:.7rem 0 1.2rem;font-weight:600}
+.ex{background:var(--bg);border-left:4px solid var(--b);border-radius:.3rem .9rem .9rem .3rem;padding:1rem 1.2rem;font:500 1.05rem/1.7 'JetBrains Mono',monospace}
+.pf{display:flex;flex-wrap:wrap;gap:.4rem;margin:0 0 1.2rem}
+.pf span{background:var(--bg);border:1px solid var(--line);border-radius:.6rem;padding:.25rem .6rem;font:500 .8rem 'JetBrains Mono',monospace}
+.pf b{color:var(--b)}
+.cta{border:0;background:var(--ink);color:var(--bg);font-weight:800;padding:1rem 1.6rem;border-radius:1rem;margin-top:1.3rem;transition:.2s}
+.cta:hover{transform:translateY(-2px)}.cta:active{transform:scale(.97)}
+.chips{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:1rem}
+.chip{border:2px solid var(--line);background:transparent;border-radius:99px;padding:.5rem 1rem;font-weight:600;font-size:.95rem;transition:.2s}
+.chip.on{color:#fff;border-color:transparent}.chip[data-c=cov].on{background:var(--b)}.chip[data-c=mg].on{background:var(--r)}.chip[data-c=tm].on{background:var(--y)}
+.stats{display:flex;gap:1.2rem;color:var(--mute);font:600 .9rem 'JetBrains Mono',monospace;margin:.4rem 0 1rem;flex-wrap:wrap}
+.stats b{color:var(--ink)}
+.big{font:700 clamp(1.9rem,6vw,3.2rem)/1.15 'JetBrains Mono',monospace;margin:.7rem 0 1.4rem;letter-spacing:-.02em;word-break:break-word}
+.big sub{font-size:.6em}
+.row{display:flex;gap:.7rem}
+input{flex:1;min-width:0;font:600 1.2rem 'JetBrains Mono',monospace;padding:1rem 1.1rem;border-radius:1rem;border:2px solid var(--line);background:transparent;color:var(--ink);outline:0;transition:.2s}
+input:focus{border-color:var(--b);box-shadow:0 0 0 4px color-mix(in srgb,var(--b) 20%,transparent)}
+input.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,transparent)}input.bad{border-color:var(--r);animation:sh .4s}
+@keyframes sh{25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+.row .cta{margin:0;white-space:nowrap}
+.fb{font-weight:800;font-size:1.15rem;margin-top:1.1rem;min-height:1.6rem}.fb.ok{color:var(--ok)}.fb.bad{color:var(--r)}
+.fb code{font-family:'JetBrains Mono',monospace}
+.why{margin-top:.8rem;color:var(--mute);font-size:.98rem;line-height:1.6}.why sub{font-size:.75em}
+.hint{color:var(--mute);font-size:.85rem;margin-top:1rem}
+@media(max-width:640px){.opts{grid-template-columns:1fr}.row{flex-direction:column}.row .cta{width:100%}}
+@media(hover:none){.o:hover,.cta:hover{transform:none}}
+</style>
+</head>
+<body>
+<main>
+  <div class="tag">Chemistry</div>
+  <h1>Binary<br><span>Nomenclature</span></h1>
+  <div class="seg" id="tabs"><button data-t="guide" class="on">Flowchart guide</button><button data-t="prac">Practice</button></div>
+  <section id="guide" class="pane on"></section>
+  <section id="prac" class="pane"></section>
+</main>
+<script>
+const $=s=>document.querySelector(s),pick=a=>a[Math.random()*a.length|0];
+const sup=n=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[n],ch=(n,s)=>(n>1?sup(n):'')+s,RN=['','I','II','III','IV'];
+const fmt=f=>f.replace(/\d+/g,m=>`<sub>${m}</sub>`),gcd=(a,b)=>b?gcd(b,a%b):a;
+const ion=(c,a,cs,as)=>{const g=gcd(c,a),x=a/g,y=c/g;return cs+(x>1?x:'')+as+(y>1?y:'')};
+
+/* ── DATA ── */
+const COV=[['CO','carbon monoxide'],['CO2','carbon dioxide'],['CS2','carbon disulfide'],['CCl4','carbon tetrachloride'],['NO','nitrogen monoxide'],['NO2','nitrogen dioxide'],['N2O','dinitrogen monoxide'],['N2O3','dinitrogen trioxide'],['N2O4','dinitrogen tetroxide'],['N2O5','dinitrogen pentoxide'],['SO2','sulfur dioxide'],['SO3','sulfur trioxide'],['SF6','sulfur hexafluoride'],['PCl3','phosphorus trichloride'],['PCl5','phosphorus pentachloride'],['P2O5','diphosphorus pentoxide'],['P4O10','tetraphosphorus decoxide'],['SiO2','silicon dioxide'],['SiCl4','silicon tetrachloride'],['BF3','boron trifluoride'],['Cl2O7','dichlorine heptoxide'],['IF5','iodine pentafluoride'],['ClF3','chlorine trifluoride'],['XeF4','xenon tetrafluoride']];
+const CAT=[['Na','sodium',1],['K','potassium',1],['Li','lithium',1],['Ag','silver',1],['Mg','magnesium',2],['Ca','calcium',2],['Ba','barium',2],['Zn','zinc',2],['Al','aluminum',3]];
+const AN=[['F','fluoride',1],['Cl','chloride',1],['Br','bromide',1],['I','iodide',1],['O','oxide',2],['S','sulfide',2],['N','nitride',3],['P','phosphide',3]];
+const TM=[['Fe','iron',[2,3]],['Cu','copper',[1,2]],['Co','cobalt',[2,3]],['Cr','chromium',[2,3]],['Mn','manganese',[2,4]]];
+const PRE=['mono','di','tri','tetra','penta','hexa','hepta','octa','nona','deca'];
+
+/* ── GUIDE ── */
+const NF=[['Name','%n','b'],['Chemical formula','%f','b']];
+const TREE={
+ r:{q:'Is the first element a non-metal or a metal?',o:[['Non-metal','n','b'],['Metal','m','r']]},
+ n:{q:'Is it written as a name or a chemical formula?',o:[['Name','nm','b'],['Chemical formula','nf','b']]},
+ m:{q:'Is it a main group metal or a transition metal? (except Zn/Ag)',o:[['Main group metal','g','r'],['Transition metal','t','y']]},
+ g:{q:'Is it written as a name or a chemical formula?',o:[['Name','gn','b'],['Chemical formula','gf','b']]},
+ t:{q:'Is it written as a name or a chemical formula?',o:[['Name','tn','b'],['Chemical formula','tf','b']]}};
+const LEAF={
+ nm:{h:'Covalent · Name → Formula',t:'The Greek prefixes in the name tell you the number of each element to write in the chemical formula.',ex:'dinitrogen pentoxide<br>→ di = 2 N, penta = 5 O → N₂O₅',c:'cov',d:'n2f',p:1},
+ nf:{h:'Covalent · Formula → Name',t:'(Greek prefix + chemical name) + (Greek prefix + chemical name + -ide). Do not use “mono” for the first element.',ex:'CO₂ → carbon dioxide<br>CO → carbon monoxide (mono only on the 2nd)',c:'cov',d:'f2n',p:1},
+ gn:{h:'Main group · Name → Formula',t:'Use the known charges off the periodic table to write a neutral formula.',ex:'magnesium chloride<br>Mg²⁺ + Cl⁻ → MgCl₂',c:'mg',d:'n2f'},
+ gf:{h:'Main group · Formula → Name',t:'(Main group metal name) + (chemical name with -ide).',ex:'Al₂O₃ → aluminum oxide',c:'mg',d:'f2n'},
+ tn:{h:'Transition metal · Name → Formula',t:'Use the Roman numeral as the charge of the metal and get the non-metal’s charge from the periodic table. Then write a neutral formula.',ex:'iron(III) oxide<br>Fe³⁺ + O²⁻ → Fe₂O₃',c:'tm',d:'n2f'},
+ tf:{h:'Transition metal · Formula → Name',t:'Use the charge / number of non-metal atoms to figure out the charge of the metal. Then name it: (T. metal + R.N.) + (non-metal -ide).',ex:'Fe₂O₃ → O²⁻ ×3 = 6− → Fe³⁺<br>→ iron(III) oxide',c:'tm',d:'f2n'}};
+let path=[];
+function guide(){
+  const cr=path.map((p,i)=>`<button class="cr" data-i="${i}">${p[0]} ✕</button>`).join('');
+  const k=path.length?path[path.length-1][1]:'r';let body;
+  if(LEAF[k]){const L=LEAF[k];
+    body=`<div class="card leaf"><small>${L.h}</small><div class="rule">${L.t}</div>${L.p?`<div class="pf">${PRE.map((p,i)=>`<span><b>${i+1}</b> ${p}</span>`).join('')}</div>`:''}<div class="ex">${L.ex}</div><button class="cta" id="gp">Practice this type →</button></div>`}
+  else{const T=TREE[k];body=`<div class="card"><h2>${T.q}</h2><div class="opts">${T.o.map(o=>`<button class="o ${o[2]}" data-l="${o[0]}" data-k="${o[1]}">${o[0]}</button>`).join('')}</div></div>`}
+  $('#guide').innerHTML=`<div class="crumbs">${cr||'<span class="cr" style="border-style:dashed;color:var(--mute)">Start here — answer the questions</span>'}</div>${body}`;
+  document.querySelectorAll('.o').forEach(b=>b.onclick=()=>{path.push([b.dataset.l,b.dataset.k]);guide()});
+  document.querySelectorAll('.cr[data-i]').forEach(b=>b.onclick=()=>{path=path.slice(0,+b.dataset.i);guide()});
+  if($('#gp'))$('#gp').onclick=()=>{const L=LEAF[k];st.cats=new Set([L.c]);st.dir=L.d;tab('prac');prac()};
+}
+
+/* ── PRACTICE ── */
+const st={cats:new Set(['cov','mg','tm']),dir:'mix',ok:0,n:0,streak:0,best:0};let Q,done;
+function make(){
+  const t=pick([...st.cats]),d=st.dir=='mix'?pick(['n2f','f2n']):st.dir;let name,formula,why;
+  if(t=='cov'){[formula,name]=pick(COV);const ps=[...formula.matchAll(/([A-Z][a-z]?)(\d*)/g)].map(m=>`${m[1]} × ${m[2]||1}`);why=`Non-metal + non-metal → Greek prefixes give the atom counts (${ps.join(', ')}). No “mono” on the first element.`}
+  else if(t=='mg'){const c=pick(CAT),a=pick(AN);formula=ion(c[2],a[2],c[0],a[0]);name=c[1]+' '+a[1];why=`Main group metal → known charges: ${c[0]}${ch(c[2],'⁺')} and ${a[0]}${ch(a[2],'⁻')} → balance to neutral → ${fmt(formula)}`}
+  else{const c=pick(TM),q=pick(c[2]),a=pick(AN);formula=ion(q,a[2],c[0],a[0]);name=`${c[1]}(${RN[q]}) ${a[1]}`;why=`Roman numeral ${RN[q]} → ${c[0]}${ch(q,'⁺')}; ${a[0]}${ch(a[2],'⁻')} from the periodic table → balance to neutral → ${fmt(formula)}`}
+  return{t,d,name,formula,why}
+}
+function prac(){
+  const T={cov:'Covalent',mg:'Main group ionic',tm:'Transition metal'};
+  $('#prac').innerHTML=`<div class="chips">${Object.keys(T).map(k=>`<button class="chip ${st.cats.has(k)?'on':''}" data-c="${k}">${T[k]}</button>`).join('')}</div>
+  <div class="seg">${[['mix','Mixed'],['n2f','Name → Formula'],['f2n','Formula → Name']].map(([v,l])=>`<button data-d="${v}" class="${st.dir==v?'on':''}">${l}</button>`).join('')}</div>
+  <div class="stats" id="stats"></div><div id="q"></div>`;
+  document.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{const k=b.dataset.c;if(st.cats.has(k)&&st.cats.size>1)st.cats.delete(k);else st.cats.add(k);prac()});
+  document.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{st.dir=b.dataset.d;prac()});
+  next();
+}
+function stats(){$('#stats').innerHTML=`<span>score <b>${st.ok}/${st.n}</b></span><span>streak <b>${st.streak}${st.streak>2?' 🔥':''}</b></span><span>best <b>${st.best}</b></span>`}
+function next(){
+  Q=make();done=false;stats();const f=Q.d=='n2f';
+  $('#q').innerHTML=`<div class="card pq"><small>${f?'Write the formula':'Name this compound'}</small><div class="big">${f?Q.name:fmt(Q.formula)}</div>
+  <div class="row"><input id="in" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="${f?'e.g. Al2O3 (capitals matter)':'e.g. iron(III) oxide'}"><button class="cta" id="ck">Check</button></div>
+  <div class="fb" id="fb"></div><div class="why" id="why"></div><div class="hint">Enter = check / next · type subscripts as plain numbers</div></div>`;
+  const i=$('#in');i.focus({preventScroll:true});
+  i.onkeydown=e=>{if(e.key=='Enter'){e.preventDefault();done?next():check()}};
+  $('#ck').onclick=()=>done?next():check();
+}
+function judge(v){
+  if(Q.d=='n2f')return v.replace(/\s/g,'').replace(/[₀-₉]/g,c=>c.charCodeAt(0)-8320)==Q.formula;
+  const n=s=>s.toLowerCase().replace(/[\s()\-]/g,'');return n(v)==n(Q.name);
+}
+function check(){
+  const i=$('#in'),r=judge(i.value);done=true;i.readOnly=true;i.className=r?'ok':'bad';
+  st.n++;if(r){st.ok++;st.streak++;st.best=Math.max(st.best,st.streak)}else st.streak=0;stats();
+  const ans=Q.d=='n2f'?fmt(Q.formula):Q.name;
+  $('#fb').className='fb '+(r?'ok':'bad');$('#fb').innerHTML=r?'✓ Correct!':`✗ Answer: <code>${ans}</code>`;
+  $('#why').innerHTML=Q.why;$('#ck').textContent='Next →';
+}
+
+/* ── TABS ── */
+function tab(t){document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.t==t));document.querySelectorAll('.pane').forEach(p=>p.classList.toggle('on',p.id==t))}
+document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>{tab(b.dataset.t);if(b.dataset.t=='prac'&&!$('#prac').innerHTML)prac()});
+guide();
+</script>
+</body>
+</html>
