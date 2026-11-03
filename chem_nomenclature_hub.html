@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Chemical Nomenclature — Study Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f1f3ee;--card:#fff;--ink:#15202b;--mute:#6b7782;--line:#dde2db;--b:#2f5fb3;--r:#c8372d;--y:#d99a1e;--ok:#2e8b57}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1519;--card:#182026;--ink:#eef2f4;--mute:#93a0a8;--line:#27323a;--b:#6fa0ff;--r:#ff6b60;--y:#f0b84a;--ok:#4cc38a}}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{font-size:clamp(15px,min(calc(9px + .5vw),calc(6px + 1.4vh)),32px)}
+body{background:var(--bg);color:var(--ink);font:1.1rem 'Manrope',system-ui,sans-serif;min-height:100dvh;
+background-image:radial-gradient(50vw 40vw at 100% 0,color-mix(in srgb,var(--b) 14%,transparent),transparent),radial-gradient(45vw 40vw at 0 100%,color-mix(in srgb,var(--r) 12%,transparent),transparent);background-attachment:fixed}
+main{max-width:52rem;margin:0 auto;padding:clamp(1.4rem,5vh,4rem) max(1.2rem,env(safe-area-inset-right)) calc(3rem + env(safe-area-inset-bottom)) max(1.2rem,env(safe-area-inset-left))}
+.tag{font:700 .75rem 'JetBrains Mono',monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--b)}
+h1{font-size:clamp(2.6rem,8vw,4.6rem);line-height:.95;font-weight:800;letter-spacing:-.04em;margin:.6rem 0 1.6rem}
+h1 span{color:var(--r)}
+button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation}
+.seg{display:inline-flex;background:var(--line);border-radius:.9rem;padding:.25rem;gap:.15rem;margin-bottom:1.4rem;max-width:100%;flex-wrap:wrap}
+.seg button{border:0;background:transparent;padding:.55rem 1.05rem;border-radius:.7rem;font-weight:600;font-size:.95rem;transition:.2s}
+.seg button.on{background:var(--card);box-shadow:0 2px 8px rgba(0,0,0,.15);font-weight:800}
+.pane{display:none}.pane.on{display:block;animation:in .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(14px)}}
+.crumbs{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem;min-height:2.2rem}
+.cr{border:2px solid var(--line);background:var(--card);border-radius:99px;padding:.3rem .85rem;font-size:.85rem;font-weight:600}
+.cr:hover{border-color:var(--ink)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:1.6rem;padding:clamp(1.3rem,4vw,2.4rem);box-shadow:0 1.2rem 3rem -1.4rem rgba(0,0,0,.35);animation:in .45s cubic-bezier(.2,.8,.2,1)}
+.card h2{font-size:clamp(1.5rem,4vw,2.1rem);line-height:1.15;letter-spacing:-.02em;margin-bottom:1.4rem}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.o{border:2px solid;border-radius:1.1rem;padding:1.3rem 1rem;font-weight:800;font-size:1.15rem;background:transparent;transition:.2s cubic-bezier(.2,.8,.2,1)}
+.o:hover{transform:translateY(-3px);color:#fff}.o.b{border-color:var(--b)}.o.b:hover{background:var(--b)}.o.r{border-color:var(--r)}.o.r:hover{background:var(--r)}.o.y{border-color:var(--y)}.o.y:hover{background:var(--y)}
+.leaf small,.pq small{font:700 .72rem 'JetBrains Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.rule{font-size:1.25rem;line-height:1.5;margin:.7rem 0 1.2rem;font-weight:600}
+.ex{background:var(--bg);border-left:4px solid var(--b);border-radius:.3rem .9rem .9rem .3rem;padding:1rem 1.2rem;font:500 1.05rem/1.7 'JetBrains Mono',monospace}
+.pf{display:flex;flex-wrap:wrap;gap:.4rem;margin:0 0 1.2rem}
+.pf span{background:var(--bg);border:1px solid var(--line);border-radius:.6rem;padding:.25rem .6rem;font:500 .8rem 'JetBrains Mono',monospace}
+.pf b{color:var(--b)}
+.cta{border:0;background:var(--ink);color:var(--bg);font-weight:800;padding:1rem 1.6rem;border-radius:1rem;margin-top:1.3rem;transition:.2s}
+.cta:hover{transform:translateY(-2px)}.cta:active{transform:scale(.97)}
+.chips{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:1rem}
+.chip{border:2px solid var(--line);background:transparent;border-radius:99px;padding:.5rem 1rem;font-weight:600;font-size:.95rem;transition:.2s}
+.chip.on{color:#fff;border-color:transparent}.chip[data-c=cov].on{background:var(--b)}.chip[data-c=mg].on{background:var(--r)}.chip[data-c=tm].on{background:var(--y)}
+.stats{display:flex;gap:1.2rem;color:var(--mute);font:600 .9rem 'JetBrains Mono',monospace;margin:.4rem 0 1rem;flex-wrap:wrap}
+.stats b{color:var(--ink)}
+.big{font:700 clamp(1.9rem,6vw,3.2rem)/1.15 'JetBrains Mono',monospace;margin:.7rem 0 1.4rem;letter-spacing:-.02em;word-break:break-word}
+.big sub{font-size:.6em}
+.row{display:flex;gap:.7rem}
+input{flex:1;min-width:0;font:600 1.2rem 'JetBrains Mono',monospace;padding:1rem 1.1rem;border-radius:1rem;border:2px solid var(--line);background:transparent;color:var(--ink);outline:0;transition:.2s}
+input:focus{border-color:var(--b);box-shadow:0 0 0 4px color-mix(in srgb,var(--b) 20%,transparent)}
+input.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,transparent)}input.bad{border-color:var(--r);animation:sh .4s}
+@keyframes sh{25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+.row .cta{margin:0;white-space:nowrap}
+.fb{font-weight:800;font-size:1.15rem;margin-top:1.1rem;min-height:1.6rem}.fb.ok{color:var(--ok)}.fb.bad{color:var(--r)}
+.fb code{font-family:'JetBrains Mono',monospace}
+.why{margin-top:.8rem;color:var(--mute);font-size:.98rem;line-height:1.6}.why sub{font-size:.75em}
+.hint{color:var(--mute);font-size:.85rem;margin-top:1rem}
+@media(max-width:640px){.opts{grid-template-columns:1fr}.row{flex-direction:column}.row .cta{width:100%}}
+@media(hover:none){.o:hover,.cta:hover{transform:none}}
+
+.chip.on{background:var(--b);color:#fff;border-color:transparent}
+.menu{display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:1rem}
+.uc{position:relative;text-align:left;border:2px solid var(--line);background:var(--card);border-radius:1.4rem;padding:1.3rem;transition:.25s cubic-bezier(.2,.8,.2,1);animation:in .5s both}
+.uc:hover{transform:translateY(-4px);border-color:var(--c);box-shadow:0 1.2rem 2.4rem -1.4rem var(--c)}
+.uc i{font-style:normal;font-size:1.9rem}.uc b{display:block;font-size:1.25rem;margin:.5rem 0 .2rem;letter-spacing:-.01em}.uc small{color:var(--mute);font-size:.88rem;line-height:1.4;display:block}
+.uc em{position:absolute;top:1rem;right:1.1rem;font:700 .75rem 'JetBrains Mono',monospace;color:var(--c);font-style:normal}
+.uc.b{--c:var(--b)}.uc.r{--c:var(--r)}.uc.y{--c:var(--y)}
+.back{border:2px solid var(--line);background:var(--card);border-radius:.8rem;padding:.45rem 1rem;font-weight:600;font-size:.9rem;margin-bottom:1.2rem}.back:hover{border-color:var(--ink)}
+.uh{display:flex;align-items:center;gap:.9rem;margin-bottom:1.1rem}.uh i{font-style:normal;font-size:2.2rem}.uh h2{font-size:clamp(1.6rem,5vw,2.4rem);letter-spacing:-.03em}
+.sg p{line-height:1.6;margin-bottom:.9rem;font-size:1.02rem}.sg p:last-child{margin:0}.sg .ex{margin:.4rem 0 1rem}
+.sg table{border-collapse:collapse;width:100%;font-size:.92rem;margin:.4rem 0 1rem}.sg td,.sg th{border:1px solid var(--line);padding:.5rem .7rem;text-align:left}.sg th{background:var(--bg)}
+.big.sm{font-size:clamp(1.4rem,4.4vw,2.2rem)}.big sup{font-size:.55em}
+.fcw{perspective:1400px;margin-bottom:1rem}
+.fci{position:relative;height:clamp(11rem,32vh,18rem);transform-style:preserve-3d;transition:transform .65s cubic-bezier(.2,.8,.2,1);cursor:pointer}
+.fcw.f .fci{transform:rotateY(180deg)}
+.fcf{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:1.5rem;border:2px solid var(--line);background:var(--card);display:flex;align-items:center;justify-content:center;text-align:center;padding:1.2rem;font:700 clamp(1.4rem,5vw,2.4rem)/1.3 'JetBrains Mono',monospace}
+.fcf.k{transform:rotateY(180deg);background:color-mix(in srgb,var(--b) 10%,var(--card))}
+.fcn{display:flex;gap:.7rem;align-items:center;justify-content:center}.fcn .btn{flex:1;max-width:10rem}
+.btn{border:2px solid var(--line);background:var(--card);border-radius:.9rem;padding:.8rem 1rem;font-weight:700}.btn:hover{border-color:var(--ink)}
+</style></head><body>
+<main id="app"></main>
+<script>
+const $=s=>document.querySelector(s),pick=a=>a[Math.random()*a.length|0],shuf=a=>a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(x=>x[1]);
+const SUP='⁰¹²³⁴⁵⁶⁷⁸⁹',sup=n=>[...String(n)].map(d=>SUP[d]).join(''),ch=(n,s)=>(n>1?sup(n):'')+s,RN=['','I','II','III','IV','V','VI'];
+const fmt=f=>f.replace(/(·?)(\d+)/g,(m,d,n)=>d?m:`<sub>${n}</sub>`),gcd=(a,b)=>b?gcd(b,a%b):a,isPoly=s=>!/^[A-Z][a-z]?$/.test(s);
+const PRE=['mono','di','tri','tetra','penta','hexa','hepta','octa','nona','deca'];
+
+/* ── element + ion data ── */
+const NM={H:['hydrogen','hydride',1],B:['boron','boride',3],C:['carbon','carbide',4],N:['nitrogen','nitride',3],O:['oxygen','oxide',2],F:['fluorine','fluoride',1],Si:['silicon','silicide',4],P:['phosphorus','phosphide',3],S:['sulfur','sulfide',2],Cl:['chlorine','chloride',1],As:['arsenic','arsenide',3],Se:['selenium','selenide',2],Br:['bromine','bromide',1],Te:['tellurium','telluride',2],I:['iodine','iodide',1],Xe:['xenon','xenide',0]};
+const AN=['H','N','O','F','P','S','Cl','Se','Br','I','Te'].map(s=>({s,n:NM[s][1],z:NM[s][2]}));
+const MET=[['Li','lithium',[1]],['Na','sodium',[1]],['K','potassium',[1]],['Rb','rubidium',[1]],['Be','beryllium',[2]],['Mg','magnesium',[2]],['Ca','calcium',[2]],['Sr','strontium',[2]],['Ba','barium',[2]]].map(([s,n,zs])=>({s,n,zs,g:1}))
+ .concat([['Al','aluminum',[3]],['Zn','zinc',[2]],['Ag','silver',[1]],['Cd','cadmium',[2]],['Fe','iron',[2,3]],['Cu','copper',[1,2]],['Co','cobalt',[2,3]],['Cr','chromium',[2,3]],['Mn','manganese',[2,4]],['Ni','nickel',[2]],['Pb','lead',[2,4]],['Sn','tin',[2,4]],['Ti','titanium',[4]],['W','tungsten',[4]],['Hg','mercury',[2]]].map(([s,n,zs])=>({s,n,zs})));
+const catOf=m=>{const z=pick(m.zs);return{s:m.s,z,name:m.g?m.n:`${m.n}(${RN[z]})`,alt:!m.g&&m.zs.length==1?m.n:0,g:m.g,poly:0}};
+const pc=(u,k,p)=>k>1?(p?`(${u})${k}`:u+k):u;
+const build=(c,a)=>{const g=gcd(c.z,a.z);return pc(c.s,a.z/g,c.poly)+pc(a.s,c.z/g,a.poly)};
+const ATE=[['chlor','Cl',3,1],['nitr','N',3,1],['carbon','C',3,2],['sulf','S',4,2],['phosph','P',4,3]],ATE2=[['brom','Br',3,1],['iod','I',3,1],['selen','Se',4,2],['tellur','Te',4,2],['arsen','As',4,3],['silic','Si',3,2]];
+const oc=n=>n>1?'O'+n:'O',az=Math.abs;
+const mk=(n,core,z)=>({n,core,z,f:core+(az(z)>1?az(z):'')+(z<0?'-':'+'),h:fmt(core)+`<sup>${az(z)>1?az(z):''}${z<0?'−':'+'}</sup>`});
+const ateI=([st,sy,n,z])=>mk(st+'ate',sy+oc(n),-z);
+const BIG=ATE.map(ateI),ANA=ATE2.map(ateI);
+const EXT=[...ATE,...ATE2].flatMap(([st,sy,n,z])=>[mk('hypo'+st+'ite',sy+oc(n-2),-z),mk(st+'ite',sy+oc(n-1),-z),mk(st+'ate',sy+oc(n),-z),mk('per'+st+'ate',sy+oc(n+1),-z)]);
+const LITTLE=[mk('ammonium','NH4',1),mk('mercury(I)','Hg2',2),mk('hydroxide','OH',-1),mk('cyanide','CN',-1),mk('permanganate','MnO4',-1),mk('chromate','CrO4',-2),mk('dichromate','Cr2O7',-2),mk('acetate','C2H3O2',-1),mk('oxalate','C2O4',-2)];
+const HY=[['sulf','S',4,2,'ate'],['sulf','S',3,2,'ite'],['carbon','C',3,2,'ate'],['phosph','P',4,3,'ate'],['phosph','P',3,3,'ite'],['selen','Se',4,2,'ate'],['selen','Se',3,2,'ite'],['arsen','As',4,3,'ate'],['arsen','As',3,3,'ite']].flatMap(([st,sy,n,z,sf])=>{const o=[];for(let k=1;k<z;k++)o.push(mk((z==3?(k==1?'mono':'di'):'')+'hydrogen'+st+sf,'H'+(k>1?k:'')+sy+oc(n),-(z-k)));return o});
+const LANI=LITTLE.filter(i=>i.z<0);
+
+/* ── generators: each returns {n,f,fh?,alt?,altF?,why} ── */
+function gIonic(){const c=catOf(pick(MET)),a=pick(AN),f=build(c,{s:a.s,z:a.z});
+ return{n:c.name+' '+a.n,alt:c.alt?[c.alt+' '+a.n]:0,f,why:`${c.s}${ch(c.z,'⁺')} + ${a.s}${ch(a.z,'⁻')} → cross-over &amp; reduce → ${fmt(f)}. ${c.g?'Group 1/2 metal: no Roman numeral.':'Not group 1/2: Roman numeral = charge → ('+RN[c.z]+').'}`}}
+const COV='IF CO SO2 CCl4 PF5 SCl6 BF3 XeF4 Cl2O5 B2O3 N2O4 As4O6 SiF4 S4N4 BrCl XeF6 NBr3 P4O10 P2O5 N2O SiO2 NH3 SeS Cl2O7 OF2 SeO2 P2S5 B2H6 BCl3 C2H4 N2O3 PCl5 SO3 CS2 CO2 SF6 NO2 NO O2F2'.split(' ');
+function covName(f){const [a,b]=[...f.matchAll(/([A-Z][a-z]?)(\d*)/g)].map(m=>[m[1],+m[2]||1]);let p=PRE[b[1]-1];const s=NM[b[0]][1];if(s[0]=='o')p=p.replace(/[ao]$/,'');return(a[1]>1?PRE[a[1]-1]:'')+NM[a[0]][0]+' '+p+s}
+function gCov(){const f=pick(COV),m=[...f.matchAll(/([A-Z][a-z]?)(\d*)/g)];return{n:covName(f),f,why:'Two nonmetals → Greek prefixes = atom counts ('+m.map(x=>x[1]+' × '+(x[2]||1)).join(', ')+'). No “mono” on the first element; never reduce subscripts.'}}
+const BA=[['HF','hydrofluoric'],['HCl','hydrochloric'],['HBr','hydrobromic'],['HI','hydroiodic'],['H2S','hydrosulfuric'],['H2Se','hydroselenic'],['H3P','hydrophosphoric'],['H3N','hydronitric'],['H2Te','hydrotelluric']];
+function gAcidB(){const [f,n]=pick(BA);return{n:n+' acid',f:f+'(aq)',why:`H⁺ + nonmetal anion, no oxygen → hydro + root + -ic acid → ${n} acid. Formula by cross-over: ${fmt(f)}`}}
+const WI={b:'Big Five — memorize them.',a:'By analogy: same column of the periodic table as a Big Five ion.',e:'-ate = base · -ite = one fewer O · hypo…-ite = two fewer O · per…-ate = one more O · the charge never changes.',h:'Add H⁺: every H added makes the charge one less negative. Use mono-/di- to count H on 3− ions.',l:'Little Nine — memorize them.'};
+const SETS={b:BIG,a:ANA,e:EXT,h:HY,l:LITTLE};
+const gIon=k=>{const i=pick(SETS[k]);return{n:i.n,f:i.f,fh:i.h,why:`${i.n} = ${i.h}. ${WI[k]}`}};
+function gTern(){const c=Math.random()<.15?pick([{s:'NH4',z:1,name:'ammonium',poly:1},{s:'Hg2',z:2,name:'mercury(I)',poly:1}]):catOf(pick(MET));
+ const i=pick(pick([BIG,BIG,ANA,LANI,LANI,EXT,HY])),f=build(c,{s:i.core,z:az(i.z),poly:isPoly(i.core)});
+ return{n:c.name+' '+i.n,alt:c.alt?[c.alt+' '+i.n]:0,f,why:`${c.name} (${c.z}+) + ${i.n} ${i.h} → cross-over, reduce, parentheses around a polyatomic ion needed more than once → ${fmt(f)}`}}
+const OXP=[...BIG,...ANA,...EXT.filter(i=>/^(chlor|brom|iod|nitr|sulf|phosph)/.test(i.n.replace(/^(hypo|per)/,''))),...LITTLE.filter(i=>/^(permanganate|chromate|dichromate|acetate|oxalate)$/.test(i.n))];
+const acid=i=>{const m=i.n.match(/^(.*)(ate|ite)$/);return m[1].replace(/(sulf|phosph)$/,x=>x=='sulf'?'sulfur':'phosphor')+(m[2]=='ate'?'ic':'ous')+' acid'};
+function gOxy(){if(Math.random()<.08)return{n:'hydrocyanic acid',f:'HCN(aq)',why:'HCN is named like a binary acid: hydro + cyan + -ic.'};
+ const i=pick(OXP),k=az(i.z),f='H'+(k>1?k:'')+i.core+'(aq)';
+ return{n:acid(i),f,why:`${i.n} → ${acid(i)}: -ate → -ic, -ite → -ous. H⁺ × ${k} balances ${i.h} → ${fmt(f)}`}}
+const AL='meth eth prop but pent hex hept oct non dec'.split(' '),alk=n=>'C'+(n>1?n:'')+'H'+(2*n+2),alc=n=>n==1?'CH3OH':`C${n}H${2*n+1}OH`;
+function gAlk(k){const n=1+Math.random()*10|0,s=AL[n-1];
+ if(k=='h')return{x:1,pr:`How many hydrogens in an alkane with ${n} carbon${n>1?'s':''}?`,a:String(2*n+2),why:`CₙH₂ₙ₊₂ → 2(${n}) + 2 = ${2*n+2}`};
+ if(k=='a')return{n:s+'ane',f:alk(n),why:`${n} carbon${n>1?'s':''} = ${s}- · all single bonds → -ane · CₙH₂ₙ₊₂ → ${fmt(alk(n))}`};
+ return{n:s+'anol',f:alc(n),altF:[alk(n).replace('H'+(2*n+2),'H'+(2*n+2))+'O'.replace('','')].map(x=>x.replace(/$/,'')),why:`Alcohol: change the alkane’s -e to -ol; drop one H and add –OH → ${fmt(alc(n))}`}}
+function gHyd(){const b=Math.random()<.5?gIonic():gTern(),k=1+Math.random()*10|0,p=PRE[k-1]+'hydrate';
+ return{n:b.n+' '+p,alt:b.alt?b.alt.map(a=>a+' '+p):0,f:b.f+'·'+k+'H2O',why:`${b.n} = ${fmt(b.f)}, then a dot and the prefix number (${PRE[k-1]} = ${k}) + H₂O.`}}
+
+/* ── units ── */
+const P=(h)=>`<div class="card sg">${h}</div>`;
+const FLOW={T:{r:{q:'Is there a metal present?',o:[['Yes','m','r'],['No','h','b']]},m:{q:'Is the metal in group 1 or 2?',o:[['Yes','L1','b'],['No','L2','y']]},h:{q:'Is the first element hydrogen?',o:[['Yes','L3','r'],['No','L4','b']]}},
+ L:{L1:{h:'Ionic · group 1/2 metal',t:'Name the metal as is, then the nonmetal with –ide.',ex:'NaF → sodium fluoride',s:'i'},L2:{h:'Ionic · any other metal',t:'Name the metal with a Roman numeral (its charge), then the nonmetal with –ide.',ex:'Fe₂O₃ → iron(III) oxide',s:'i'},L3:{h:'Binary acid',t:'Name it as an acid: hydro – root – ic acid (when dissolved in water).',ex:'HCl(aq) → hydrochloric acid',s:'a'},L4:{h:'Covalent',t:'Greek prefixes on both elements (never mono- on the first); second element ends in –ide.',ex:'PCl₅ → phosphorus pentachloride',s:'c'}}};
+const U=[
+{id:'bi',t:'Binary Ionic',ic:'🧂',col:'b',d:'Metal + nonmetal · Roman numerals · cross-over',subs:[['i','Binary ionic',gIonic]],
+ study:P(`<p><b>Binary ionic</b> = a metal + a nonmetal. Name the <b>cation</b> first, then the <b>anion</b> with <b>–ide</b>.</p><p><b>Roman numerals:</b> groups 1 &amp; 2 → name the metal as is. Any other metal gets a Roman numeral = its charge, no space: aluminum(III) = Al³⁺.</p><p><b>–ide stems:</b> nitride · phosphide · oxide · sulfide · selenide · telluride · fluoride · chloride · bromide · iodide · hydride</p><p><b>Finding the numeral:</b> anion charge × number of anions = total. Split it over the metal atoms. Co₃N₂: N³⁻ × 2 = 6−, so 3 Co = 6+, each 2+ → <b>cobalt(II) nitride</b>.</p><p><b>Writing formulas:</b> cation, then anion → <b>cross-over</b> the charge numbers as subscripts → reduce.</p><div class="ex">Al³⁺ O²⁻ → Al₂O₃<br>Ca²⁺ S²⁻ → Ca₂S₂ = CaS</div>`)},
+{id:'bc',t:'Binary Covalent',ic:'🔗',col:'r',d:'Two nonmetals · Greek prefixes',subs:[['c','Covalent',gCov]],deck:()=>PRE.map((p,i)=>[String(i+1),p+'-']),
+ study:P(`<p><b>Covalent</b> = two nonmetals sharing electrons. No ions, no charges, <b>no Roman numerals</b>.</p><p><b>Prefixes:</b> 1 mono · 2 di · 3 tri · 4 tetra · 5 penta · 6 hexa · 7 hepta · 8 octa · 9 nona · 10 deca</p><p>Use them on both elements, <b>except never mono- on the first</b>. Second element ends in <b>–ide</b>. Drop the o/a of the prefix before oxide: <i>monoxide</i>, not monooxide.</p><p><b>Formulas:</b> write each symbol with the prefix number as a subscript. Subscripts are <b>never reduced</b>.</p><div class="ex">P₄O₁₀ → tetraphosphorus decoxide<br>N₂O₃ → dinitrogen trioxide<br>silicon tetrachloride → SiCl₄</div>`)},
+{id:'ba',t:'Binary Acids',ic:'💧',col:'y',d:'hydro – root – ic acid',subs:[['a','Binary acids',gAcidB]],deck:()=>BA.map(([f,n])=>[fmt(f)+'(aq)',n+' acid']),
+ study:P(`<p>An acid with <b>no oxygen</b>: H⁺ + a nonmetal anion, dissolved in water (aq).</p><p><b>Name:</b> <b>hydro</b> – root – <b>ic acid</b>. HCl(g) is hydrogen chloride; dissolved, HCl(aq) is <b>hydrochloric acid</b>.</p><p><b>Formula:</b> same cross-over as ionic. The cation is always H⁺, the anion comes from the periodic table.</p><div class="ex">HF(aq) → hydrofluoric acid<br>H₂S(aq) → hydrosulfuric acid<br>hydrophosphoric acid → H₃P(aq)</div><p>Acids are always soluble in water, so they always get (aq) in equations.</p>`)},
+{id:'br',t:'Binary Review',ic:'🧭',col:'b',d:'Ionic vs covalent vs acid · decision flow',subs:[['i','Ionic',gIonic],['c','Covalent',gCov],['a','Acids',gAcidB]],
+ study:null},
+{id:'pa',t:'Polyatomic Ions',ic:'🧪',col:'r',d:'Big Five · analogy · extension · hydrogenation',deck:()=>[...BIG,...ANA,...LITTLE].map(i=>[i.n,i.h]),
+ subs:[['b','Big Five',()=>gIon('b')],['a','Analogy',()=>gIon('a')],['e','Extension',()=>gIon('e')],['h','Hydrogenation',()=>gIon('h')],['l','Little Nine',()=>gIon('l')]],
+ study:P(`<p><b>The Big Five</b> (all –ate, contain oxygen): chlorate ClO₃⁻ · nitrate NO₃⁻ · carbonate CO₃²⁻ · sulfate SO₄²⁻ · phosphate PO₄³⁻</p><p><b>By analogy:</b> same column, same formula. Br/I under Cl → bromate BrO₃⁻, iodate IO₃⁻. Se under S → selenate SeO₄²⁻. As under P → arsenate AsO₄³⁻.</p><p><b>By extension</b> (charge never changes):</p><div class="ex">hypochlorite ClO⁻ · chlorite ClO₂⁻<br>chlorate ClO₃⁻ · perchlorate ClO₄⁻</div><p>–ite = one fewer O than –ate · hypo-…-ite = two fewer · per-…-ate = one more.</p><p><b>By hydrogenation:</b> add H⁺ → charge goes up by one. SO₄²⁻ → HSO₄⁻ hydrogensulfate; PO₄³⁻ → HPO₄²⁻ monohydrogenphosphate → H₂PO₄⁻ dihydrogenphosphate.</p><p><b>Little Nine:</b> NH₄⁺ ammonium · Hg₂²⁺ mercury(I) · OH⁻ hydroxide · CN⁻ cyanide · MnO₄⁻ permanganate · CrO₄²⁻ chromate · Cr₂O₇²⁻ dichromate · C₂H₃O₂⁻ acetate · C₂O₄²⁻ oxalate</p><p><i>Type charges like <b>SO4 2-</b> or <b>SO4^2-</b>.</i></p>`)},
+{id:'te',t:'Ternary Ionic',ic:'🧱',col:'y',d:'Compounds with polyatomic ions',subs:[['t','Ternary ionic',gTern]],
+ study:P(`<p><b>Ternary</b> = contains a polyatomic ion (3+ elements). Naming and Roman-numeral rules are the same as binary: cation first, then the anion name.</p><p><b>Spot it:</b> endings –ate / –ite, or hydroxide, cyanide, ammonium, mercury(I), etc. Cations can be metals, NH₄⁺, or Hg₂²⁺.</p><p><b>Formulas:</b> cross-over, reduce the ratio, and put a polyatomic ion in <b>parentheses</b> when you need more than one.</p><div class="ex">aluminum(III) sulfate: Al³⁺ SO₄²⁻ → Al₂(SO₄)₃<br>tin(IV) chromate: Sn₂(CrO₄)₄ = Sn(CrO₄)₂<br>sodium hydrogencarbonate → NaHCO₃</div><p>Find a Roman numeral the same way: start from the anion’s total charge and work backwards.</p>`)},
+{id:'ox',t:'Oxyacids',ic:'🧯',col:'r',d:'-ate → -ic · -ite → -ous',subs:[['o','Oxyacids',gOxy]],
+ study:P(`<p>All acids have <b>H⁺</b> as the cation, so use the anion’s name:</p><div class="ex">anion ends –ate → acid ends <b>–ic</b><br>anion ends –ite → acid ends <b>–ous</b></div><p>Binary acids (–ide anions) stay hydro-root-ic. HCN is the odd one: hydrocyanic acid.</p><p><b>Root changes:</b> sulfate → <i>sulfuric</i>, sulfite → <i>sulfurous</i>, phosphate → <i>phosphoric</i>, phosphite → <i>phosphorous</i>.</p><p><b>Formulas:</b> same as ternary. Cross-over H⁺ with the anion: H₃PO₄, HNO₂, H₂C₂O₄, HMnO₄, HBrO.</p><div class="ex">HC₂H₃O₂ → acetic acid<br>HNO₂ → nitrous acid<br>perchloric acid → HClO₄<br>iodous acid → HIO₂</div>`)},
+{id:'al',t:'Alkanes & Alcohols',ic:'⛽',col:'b',d:'First ten alkanes · CₙH₂ₙ₊₂ · –ol',deck:()=>AL.map((s,i)=>[s+'ane',fmt(alk(i+1))+'<br>'+s+'anol · '+fmt(alc(i+1))]),
+ subs:[['a','Alkanes',()=>gAlk('a')],['o','Alcohols',()=>gAlk('o')],['h','Count H',()=>gAlk('h')]],
+ study:P(`<p><b>Hydrocarbon</b> = only carbon and hydrogen. <b>Alkanes</b> have all single C–C bonds (“saturated”), general formula <b>CₙH₂ₙ₊₂</b>.</p><p><b>First ten:</b> methane CH₄ · ethane C₂H₆ · propane C₃H₈ · butane C₄H₁₀ · pentane C₅H₁₂ · hexane C₆H₁₄ · heptane C₇H₁₆ · octane C₈H₁₈ · nonane C₉H₂₀ · decane C₁₀H₂₂</p><p><b>Alcohols</b> contain –OH. Take the alkane, drop one H, add OH, and change the –e to <b>–ol</b>.</p><div class="ex">methane CH₄ → methanol CH₃OH<br>ethane C₂H₆ → ethanol C₂H₅OH<br>pentanol → C₅H₁₁OH (or C₅H₁₂O)</div><p>Methanol (one carbon) is the poisonous one; ethanol is the drinking alcohol.</p>`)},
+{id:'hy',t:'Hydrates',ic:'🌊',col:'y',d:'Ionic compounds with water in the crystal',subs:[['h','Hydrates',gHyd]],deck:()=>[['½','hemi-'],...PRE.map((p,i)=>[String(i+1),p+'-'])],
+ study:P(`<p><b>Hydrates</b> are ionic compounds with water molecules trapped in the crystal lattice.</p><p><b>Formula:</b> write the ionic compound, a dot ( · ), then the number and H₂O.</p><p><b>Name:</b> the ionic compound name + a prefix + <b>hydrate</b>.</p><div class="ex">zinc(II) chloride hexahydrate → ZnCl₂·6H₂O<br>barium hydroxide octahydrate → Ba(OH)₂·8H₂O<br>MnBr₂·4H₂O → manganese(II) bromide tetrahydrate</div><p>Prefixes: ½ hemi · 1 mono · 2 di · 3 tri · 4 tetra · 5 penta · 6 hexa · 7 hepta · 8 octa · 9 nona · 10 deca</p><p><i>Type the dot as · or . or *</i></p>`)}];
+const gens=[gIonic,gCov,gAcidB,()=>gIon(pick([...'baehl'])),gTern,gOxy,()=>gAlk(pick(['a','o','h'])),gHyd];
+U.push({id:'all',t:'Final Mix',ic:'🏁',col:'r',d:'Everything, shuffled together',subs:[['x','Everything',()=>pick(gens)()]],study:P('<p>Every unit mixed together. Use <b>Guided</b> mode to see the steps before you answer, or <b>Quiz</b> mode to test yourself.</p>')});
+
+/* ── app ── */
+const S={ses:{},u:null,tab:'study',sel:new Set(),dir:'mix',guided:false};let Q,done,deck,ci;
+function home(){S.u=null;$('#app').innerHTML=`<div class="tag">Accel Chem · Chapter 6</div><h1>Chemical<br><span>Nomenclature</span></h1><div class="menu">${U.map((u,i)=>{const s=S.ses[u.id];return`<button class="uc ${u.col}" data-u="${u.id}" style="animation-delay:${i*.04}s"><i>${u.ic}</i><b>${u.t}</b><small>${u.d}</small>${s?`<em>${s.ok}/${s.n}</em>`:''}</button>`}).join('')}</div>`;
+ document.querySelectorAll('.uc').forEach(b=>b.onclick=()=>open(b.dataset.u))}
+function open(id,tab,sub){S.u=U.find(u=>u.id==id);S.tab=tab||'study';S.sel=new Set(sub?[sub]:S.u.subs.map(s=>s[0]));S.dir='mix';S.guided=false;scrollTo(0,0);
+ const u=S.u;$('#app').innerHTML=`<button class="back" id="bk">← Menu</button><div class="uh"><i>${u.ic}</i><h2>${u.t}</h2></div><div class="seg" id="tabs">${[['study','Study guide'],['prac','Practice'],...(u.deck?[['cards','Flashcards']]:[])].map(([k,l])=>`<button data-t="${k}">${l}</button>`).join('')}</div><div id="pane" class="pane on"></div>`;
+ $('#bk').onclick=home;document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>show(b.dataset.t));show(S.tab)}
+function show(t){S.tab=t;document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.t==t));const p=$('#pane');p.style.animation='none';void p.offsetWidth;p.style.animation='';
+ if(t=='study'){if(S.u.study)p.innerHTML=S.u.study;else{p.innerHTML=`<div class="card sg"><p><b>Ionic vs covalent:</b></p><table><tr><th></th><th>Ionic</th><th>Covalent</th></tr><tr><td>Made of</td><td>metal + nonmetal</td><td>nonmetal + nonmetal</td></tr><tr><td>Electrons</td><td>transferred</td><td>shared</td></tr><tr><td>Charges</td><td>cation + anion</td><td>none</td></tr><tr><td>Naming</td><td>Roman numerals (non group 1/2)</td><td>Greek prefixes</td></tr><tr><td>Room temp.</td><td>solid, high melting point</td><td>solid/liquid/gas, low melting point</td></tr></table><p style="font-size:.85rem;color:var(--mute)">The table on your worksheet has the two “naming” entries swapped — this is the correct way round.</p></div><div id="flow" style="margin-top:1rem"></div>`;flow($('#flow'),FLOW.T,FLOW.L,s=>{S.sel=new Set([s]);show('prac')})}}
+ else if(t=='prac')prac();else cards()}
+function flow(el,T,L,go){let path=[];const r=()=>{const k=path.length?path[path.length-1][1]:'r';
+ el.innerHTML=`<div class="crumbs">${path.map((p,i)=>`<button class="cr" data-i="${i}">${p[0]} ✕</button>`).join('')||'<span class="cr" style="border-style:dashed;color:var(--mute)">Answer the questions to find the rule</span>'}</div>`+(L[k]?`<div class="card leaf"><small>${L[k].h}</small><div class="rule">${L[k].t}</div><div class="ex">${L[k].ex}</div><button class="cta" id="fp">Practice this →</button></div>`:`<div class="card"><h2>${T[k].q}</h2><div class="opts">${T[k].o.map(o=>`<button class="o ${o[2]}" data-l="${o[0]}" data-k="${o[1]}">${o[0]}</button>`).join('')}</div></div>`);
+ el.querySelectorAll('.o').forEach(b=>b.onclick=()=>{path.push([b.dataset.l,b.dataset.k]);r()});el.querySelectorAll('.cr[data-i]').forEach(b=>b.onclick=()=>{path=path.slice(0,+b.dataset.i);r()});if(L[k])$('#fp').onclick=()=>go(L[k].s)};r()}
+
+/* practice */
+function prac(){const u=S.u;$('#pane').innerHTML=`${u.subs.length>1?`<div class="chips">${u.subs.map(s=>`<button class="chip ${S.sel.has(s[0])?'on':''}" data-s="${s[0]}">${s[1]}</button>`).join('')}</div>`:''}<div class="seg">${[['mix','Mixed'],['n2f','Name → Formula'],['f2n','Formula → Name']].map(([v,l])=>`<button data-d="${v}" class="${S.dir==v?'on':''}">${l}</button>`).join('')}</div> <div class="seg">${[[0,'Quiz'],[1,'Guided (steps shown)']].map(([v,l])=>`<button data-g="${v}" class="${+S.guided==v?'on':''}">${l}</button>`).join('')}</div><div class="stats" id="stats"></div><div id="q"></div>`;
+ document.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{const k=b.dataset.s;if(S.sel.has(k)&&S.sel.size>1)S.sel.delete(k);else S.sel.add(k);prac()});
+ document.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{S.dir=b.dataset.d;prac()});document.querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>{S.guided=b.dataset.g=='1';prac()});ask()}
+const ss=()=>S.ses[S.u.id]||(S.ses[S.u.id]={ok:0,n:0,st:0,best:0});
+function stats(){const s=ss();$('#stats').innerHTML=`<span>score <b>${s.ok}/${s.n}</b></span><span>streak <b>${s.st}${s.st>2?' 🔥':''}</b></span><span>best <b>${s.best}</b></span>`}
+function ask(){const sub=pick([...S.sel]);Q={...S.u.subs.find(s=>s[0]==sub)[2](sub),d:S.dir=='mix'?pick(['n2f','f2n']):S.dir};done=false;stats();
+ const f=Q.d=='n2f',x=Q.x,body=x?Q.pr:f?Q.n:(Q.fh||fmt(Q.f));
+ $('#q').innerHTML=`<div class="card pq"><small>${x?'Quick question':f?'Write the formula':'Name this compound'}</small><div class="big ${x||(f&&Q.n.length>24)?'sm':''}">${body}</div><div class="why">${S.guided?'💡 '+Q.why:''}</div><div class="row" style="margin-top:1rem"><input id="in" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="${x?'number':f?'formula, e.g. Al2O3 or SO4 2-':'name, e.g. iron(III) oxide'}"><button class="cta" id="ck">Check</button></div><div class="fb" id="fb"></div><div class="why" id="why"></div><div class="hint">Enter = check / next · capitals matter in formulas · empty = skip</div></div>`;
+ const i=$('#in');i.focus({preventScroll:true});i.onkeydown=e=>{if(e.key=='Enter'){e.preventDefault();e.stopPropagation();done?ask():check()}};$('#ck').onclick=()=>done?ask():check()}
+const normF=s=>s.replace(/\(aq\)/gi,'').replace(/[\s^_]/g,'').replace(/[₀-₉]/g,c=>c.charCodeAt(0)-8320).replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹]/g,c=>SUP.indexOf(c)).replace(/⁺/g,'+').replace(/[⁻−–]/g,'-').replace(/[•∙.*]/g,'·').replace(/([+-])(\d)$/,'$2$1').replace(/1([+-])$/,'$1');
+const normN=s=>s.toLowerCase().replace(/[\s()\-–,]/g,'');
+function judge(v){if(Q.x)return v.trim()==Q.a;if(Q.d=='n2f'){const u=normF(v);return[Q.f,...(Q.altF||[])].some(a=>normF(a)==u)}const u=normN(v);return[Q.n,...(Q.alt||[])].some(a=>normN(a)==u)}
+function check(){const i=$('#in'),r=judge(i.value),s=ss();done=true;i.readOnly=true;i.className=r?'ok':'bad';s.n++;if(r){s.ok++;s.st++;s.best=Math.max(s.best,s.st)}else s.st=0;stats();
+ const ans=Q.x?Q.a:Q.d=='n2f'?(Q.fh||fmt(Q.f)):Q.n;$('#fb').className='fb '+(r?'ok':'bad');$('#fb').innerHTML=r?'✓ Correct!':`✗ Answer: <code>${ans}</code>`;$('#why').innerHTML=Q.why;$('#ck').textContent='Next →'}
+
+/* flashcards */
+function cards(){deck=shuf(S.u.deck());ci=0;$('#pane').innerHTML=`<div class="fcw" id="fcw"><div class="fci" id="fci"></div></div><div class="fcn"><button class="btn" id="pv">←</button><button class="btn" id="fl">Flip</button><button class="btn" id="nx">→</button></div><div class="hint" style="text-align:center" id="cn"></div>`;
+ $('#fcw').onclick=flip;$('#fl').onclick=flip;$('#pv').onclick=()=>go(-1);$('#nx').onclick=()=>go(1);card()}
+function card(){const[a,b]=deck[ci];$('#fci').innerHTML=`<div class="fcf">${a}</div><div class="fcf k">${b}</div>`;$('#cn').textContent=`${ci+1} / ${deck.length} · Space = flip · ← → = move`}
+function flip(){$('#fcw').classList.toggle('f')}
+function go(d){ci=(ci+d+deck.length)%deck.length;$('#fcw').classList.remove('f');setTimeout(card,d?120:0)}
+document.addEventListener('keydown',e=>{if(S.u&&S.tab=='cards'){if(e.key==' '){e.preventDefault();flip()}else if(e.key=='ArrowRight')go(1);else if(e.key=='ArrowLeft')go(-1)}if(e.key=='Escape'&&S.u&&document.activeElement.tagName!='INPUT')home()});
+home();
+</script>
+</body></html>
